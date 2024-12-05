@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      - POSTGRES_USER=anas  # Change this to your username
+      - POSTGRES_PASSWORD=anaspass # Change this to your password
+      - POSTGRES_DB=mydb # Change this to your database name
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
+    driver: local
+
