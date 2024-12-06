@@ -20,7 +20,7 @@ jest.mock('@/lib/prisma', () => ({
 
 const createTestServer = (handler) => {
   return createServer((req, res) => {
-    return apiResolver(req, res, undefined, handler, {} as any, false)
+    return apiResolver(req, res, undefined, handler, {}, false)
   })
 }
 
@@ -57,6 +57,8 @@ describe('API Routes', () => {
     it('rejects a withdrawal with insufficient funds', async () => {
       const prisma = require('@/lib/prisma').prisma
       prisma.account.findFirst.mockResolvedValue({ id: '1', balance: 100 })
+      prisma.account.update.mockResolvedValue({ balance: 0 })
+      prisma.transaction.create.mockResolvedValue({})
 
       const server = createTestServer(postTransaction)
       const response = await supertest(server)
@@ -85,4 +87,3 @@ describe('API Routes', () => {
     })
   })
 })
-
