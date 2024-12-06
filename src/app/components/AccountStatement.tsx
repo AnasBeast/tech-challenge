@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react'
 
 type Transaction = {
   id: string
-  date: string
+  createdAt: string
   amount: number
   balance: number
+  type: string
 }
 
 export default function AccountStatement() {
@@ -20,6 +21,7 @@ export default function AccountStatement() {
     const response = await fetch('/api/transactions')
     const data = await response.json()
     setTransactions(data)
+    console.log(data)
   }
 
   return (
@@ -36,8 +38,8 @@ export default function AccountStatement() {
         <tbody>
           {transactions.map((transaction) => (
             <tr key={transaction.id}>
-              <td>{new Date(transaction.date).toLocaleDateString()}</td>
-              <td className={`text-right ${transaction.amount >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+              <td>{new Date(transaction.createdAt).toLocaleDateString()}</td>
+              <td className={`text-right ${transaction.type === "deposit" ? 'text-green-500' : 'text-red-500'}`}>
                 {transaction.amount.toFixed(2)}
               </td>
               <td className="text-right">{transaction.balance.toFixed(2)}</td>
