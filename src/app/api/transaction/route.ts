@@ -36,7 +36,7 @@ export async function POST(request: Request) {
       data: { balance: newBalance },
     })
 
-    let transaction = await prisma.transaction.create({
+    const transaction = await prisma.transaction.create({
       data: {
         type,
         amount,

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useTransactions } from '../context/TransactionsContext'
+import { useTransactions, Transaction } from '../context/TransactionsContext'
 
 type TransactionType = 'deposit' | 'withdraw' | 'transfer'
 
@@ -37,11 +37,11 @@ export default function TransactionForm() {
       const data = await response.json()
       setAmount('')
       setIban('')
-      setTransactions((prev) => [data.transaction, ...prev])
+      setTransactions((prev: Transaction[]) => [data.transaction, ...prev])
       router.refresh()
     } catch (error) {
       console.error('Error creating transaction:', error)
-      setError(error.message || 'An error occurred')
+      setError('An error occurred')
     }
   }
 

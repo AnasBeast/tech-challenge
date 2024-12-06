@@ -2,17 +2,19 @@
 
 import { createContext, useContext, useState, ReactNode } from 'react'
 
-type Transaction = {
+export type Transaction = {
   id: string
   createdAt: string
   amount: number
   balance: number
   type: string
+  iban?: string
+  accountId :string
 }
 
 type TransactionsContextType = {
   transactions: Transaction[]
-  setTransactions: (transactions: Transaction[]) => void
+  setTransactions: React.Dispatch<React.SetStateAction<Transaction[]>>
 }
 
 const TransactionsContext = createContext<TransactionsContextType | undefined>(undefined)
