@@ -36,7 +36,7 @@ export async function POST(request: Request) {
       data: { balance: newBalance },
     })
 
-    await prisma.transaction.create({
+    let transaction = await prisma.transaction.create({
       data: {
         type,
         amount,
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
       },
     })
 
-    return NextResponse.json({ success: true, balance: newBalance })
+    return NextResponse.json({ success: true, transaction:transaction, balance: newBalance })
   } catch (error) {
     console.error('Error processing transaction:', error)
     return NextResponse.json({ error: 'Failed to process transaction' }, { status: 500 })
