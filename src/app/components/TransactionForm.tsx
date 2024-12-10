@@ -54,7 +54,7 @@ export default function TransactionForm() {
   return (
       <motion.form 
       onSubmit={handleSubmit}
-      className="bg-gray-800 rounded-lg p-6 shadow-lg max-w-lg mx-auto"
+      className="bg-gray-800 rounded-lg p-6 shadow-lg"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
