@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useTransactions } from '../context/TransactionsContext'
+import { motion } from 'framer-motion'
 
 export default function AccountBalance() {
   const [balance, setBalance] = useState(0)
@@ -18,9 +19,13 @@ export default function AccountBalance() {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6 mb-8">
-      <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Account Balance</h2>
-      <p className="text-3xl font-bold text-gray-900 dark:text-gray-100">${balance.toFixed(2)}</p>
-    </div>
+    <motion.div 
+      className="bg-gray-800 rounded-lg p-6 mb-8 shadow-lg"
+      whileHover={{ scale: 1.05 }}
+      transition={{ type: "spring", stiffness: 300 }}
+    >
+      <h2 className="text-2xl font-semibold mb-4">Account Balance</h2>
+      <p className="text-4xl font-bold text-green-400">${balance.toFixed(2)}</p>
+    </motion.div>
   )
 }
